@@ -1,15 +1,13 @@
-#!/bin/bash
-
-. "$TOOLS_DIR/color.sh"
+#bin/sh
 
 echo -e "\n${BLUE}#############################################################${ENDCOLOR}"
 echo -e "${BLUE}#####                                                   #####${ENDCOLOR}"
-echo -e "${BLUE}#####     Update pip / Identify dependency manager      #####${ENDCOLOR}"
+echo -e "${BLUE}#####     Kill all processes which user Snowflake       #####${ENDCOLOR}"
+echo -e "${BLUE}#####         externalbrowser loopback port             #####${ENDCOLOR}"
 echo -e "${BLUE}#####                                                   #####${ENDCOLOR}"
 echo -e "${BLUE}#############################################################${ENDCOLOR}"
 
-source $WORKSPACE_PATH/.venv/bin/activate
+sudo lsof -t -i :57531
+sudo lsof -t -i :57531 | xargs -r sudo kill -9
 
-echo -e "\n${GREEN}> Update pip tool.${ENDCOLOR}\n"
-pip install --upgrade pip
-pip install -r $WORKSPACE_PATH/.devcontainer/requirements.txt
+echo -e "\nDone\n"

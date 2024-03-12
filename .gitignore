@@ -4,7 +4,7 @@
 **/snapshots
 **/target
 **/logs
-**/package.lock.yml
+**/package-lock.yml
 
 # env
 **/.user.yml

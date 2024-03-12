@@ -1,10 +1,10 @@
 #!/bin/bash
 
-. "$WORKSPACE_PATH/.devcontainer/color.sh"
+. "$TOOLS_DIR/color.sh"
 
 echo -e "\n${BLUE}#############################################################${ENDCOLOR}"
 echo -e "${BLUE}#####                                                   #####${ENDCOLOR}"
-echo -e "${BLUE}#####     Configure virtual environment                 #####${ENDCOLOR}"
+echo -e "${BLUE}#####         Configure virtual environment             #####${ENDCOLOR}"
 echo -e "${BLUE}#####                                                   #####${ENDCOLOR}"
 echo -e "${BLUE}#############################################################${ENDCOLOR}"
 

@@ -1,5 +1,5 @@
 #!/bin/bash
-. "$WORKSPACE_PATH/.devcontainer/color.sh"
+. "$TOOLS_DIR/color.sh"
 cd "$WORKSPACE_PATH/.devcontainer/install"
 
 CONTAINER_TYPE=$(jq -r '.customizations.vscode.settings."container.type"' $WORKSPACE_PATH/.devcontainer/devcontainer.json);
