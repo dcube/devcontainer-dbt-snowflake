@@ -1,4 +1,4 @@
-# prfr-data-archi-template-dbt
+# devcontainer-dbt-snowflake
 Starter kit for all our dbt projects within vscode
 
 # Prerequisites
