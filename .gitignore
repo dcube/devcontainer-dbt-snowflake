@@ -1,0 +1,13 @@
+# dbt
+**/dbt_packages
+**/docs
+**/snapshots
+**/target
+**/logs
+**/package.lock.yml
+
+# env
+**/.user.yml
+**/*.env
+**/.venv
+**/*.secrets
