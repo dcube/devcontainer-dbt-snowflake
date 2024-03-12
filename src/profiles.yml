@@ -1,0 +1,28 @@
+default:
+  target: default
+  outputs:
+    default:
+      type: snowflake
+      account: "{{ env_var('DBT_SF_ACCOUNT') }}"
+
+      # User/password auth
+      user: "{{ env_var('DBT_SF_USER') }}"
+      password: "{{ env_var('DBT_SF_PASSWORD') }}"
+      role: "{{ env_var('DBT_SF_ROLE') }}"
+      database: "{{ env_var('DBT_SF_DATABASE') }}"
+      schema: "{{ env_var('DBT_SF_SCHEMA') }}"
+      warehouse: "{{ env_var('DBT_SF_WAREHOUSE') }}"
+      
+      threads: 8
+      client_session_keep_alive: False
+      
+      # query_tag: [anything]
+
+      # optional
+      connect_retries: 0 # default 0
+      connect_timeout: 10 # default: 10
+      retry_on_database_errors: False # default: false 
+      retry_all: False  # default: false
+
+config: 
+  log_format: json

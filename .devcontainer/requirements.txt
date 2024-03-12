@@ -1,0 +1,4 @@
+dbt-snowflake==1.7
+snowflake-connector-python==3.7.1
+sqlfluff==2.3.5
+keyring==24.3.1

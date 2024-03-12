@@ -1,0 +1,85 @@
+{
+    "name": "Python 3",
+    "workspaceMount": "source=${localWorkspaceFolder},target=/workspaces/app,type=bind",
+    "workspaceFolder": "/workspaces/app",
+    /*"mounts": [
+        "type=bind,source=${localEnv:HOME}${localEnv:USERPROFILE}/.ssh,target=/home/vscode/.ssh,readonly"
+    ],*/
+    "build": {
+        "dockerfile": "Dockerfile",
+        "context": "..",
+        "args": {
+            "VARIANT": "3.11-bullseye",
+            "NODE_VERSION": "lts/*"
+        }
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-python.python",
+                "sanaajani.taskrunnercode",
+                "ms-python.vscode-pylance",
+                "ms-python.pylint",
+                "ms-python.mypy-type-checker",
+                "ms-python.flake8"
+            ],
+            "settings": {
+                "container.type": "dbt-snowflake",
+                "terminal.integrated.defaultProfile.linux": "bash",
+                "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python",
+                "dbt.dbtPythonPathOverride": "${workspaceFolder}/.venv/bin/python",
+                "python.createEnvironment.contentButton": "hide",
+                "python.analysis.typeCheckingMode": "strict",
+                "python.analysis.importFormat": "absolute",
+                "python.analysis.logLevel": "Trace",
+                "python.languageServer": "Pylance",
+                "files.trimTrailingWhitespace": true,
+                "files.trimFinalNewlines": true,
+                "files.insertFinalNewline": true,
+                "files.eol": "\n",
+                "files.association": {
+                    "*.sql": "jinja-sql",
+                    "*.yaml": "jinja-yaml",
+                    "*.yml": "jinja-yaml",
+                    "*.md": "jinja-md"
+                },
+                "files.exclude": {
+                    "**/__pycache__": true,
+                    "**/.mypy_cache": true,
+                    "**/.venv": true,
+                    "**/.pytest_cache": true,
+                    "**/.python_packages": true
+                },
+                "editor.formatOnSaveMode": "modifications",
+                "editor.formatOnSave": true,
+                "editor.formatOnType": false,
+                "mypy-type-checker.args": [],
+                "python.dependencyManager": "pip",
+                "python.testing.coverageEnabled": false,
+                "python.testing.pytestEnabled": false,
+                "python.testing.unittestEnabled": false,
+                "editor.defaultFormatter": "ms-python.black-formatter",
+                "git.preCommitEnabled": false,
+                "sqlfluff.executablePath": "${workspaceFolder}/.venv/bin/sqlfluff",
+                "sqlfluff.format.enabled": true,
+                "sqlfluff.ignoreLocalConfig": false,
+                "sqlfluff.ignoreParsing": false,
+                "sqlfluff.linter.run": "onSave",
+                "sqlfluff.experimental.format.executeInTerminal": true,
+                "[sql]": {
+                    "editor.defaultFormatter": "dorzey.vscode-sqlfluff"
+                }
+            }
+        }
+    },
+    "postCreateCommand": "sudo chmod +x $WORKSPACE_PATH/.devcontainer/install.sh && $WORKSPACE_PATH/.devcontainer/install.sh && . ~/.bashrc",
+    "remoteUser": "vscode",
+
+    "remoteEnv": {
+        "DBT_PROFILES_DIR": "/workspaces/app/.venv",
+        "DBT_SF_ACCOUNT": "do68421.eu-west-3.aws",
+		"DBT_SF_SCHEMA": "DEV",
+        "SF_AUTH_SOCKET_ADDR": "localhost",
+        "SF_AUTH_SOCKET_PORT": "57531" //exposed via the Dockerfile
+	}
+}
