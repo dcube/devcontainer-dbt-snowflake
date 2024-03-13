@@ -9,16 +9,16 @@ On your local machine, you'll need:
 - A snowflake account with SSO enabled
 
 # Create the .credentials.env file
-Before building the container (next step), you have to create the .credential.env in the .devccontainer.
-The file must contain your Snowflake username:
+Before building the container (next step), you have to create the **.credential.env** into the **.devccontainer** folder.
+The file must contain your Snowflake and git informations:
 
 ```bash
 DBT_SF_ACCOUNT=<your snowflake account>
 DBT_SF_WAREHOUSE=<the warehouse to use with dbt>
-DBT_SF_DATABASE=<a target database>
+DBT_SF_DATABASE=<the database where dbt will write data>
 DBT_SF_SCHEMA=<prefix for your database schemas>
 DBT_SF_USER=<your email>
-DBT_SF_ROLE=<snowflake >
+DBT_SF_ROLE=<the snowflake role you want to use >
 GIT_USEREMAIL=$DBT_SF_USER
 GIT_USERNAME=<your git username>
 ```
@@ -44,17 +44,17 @@ This will refresh the Visual Studio Code window with the changes made during the
 
 # Play with dbt under vscode
 By default our devcontainer for dbt-snowflake comes from:
-- dbt power user extensions and sqlfluff
+- dbt power user extension and sqlfluff
 - we also have include the dbt_utils package
 
-To play with dbt, you just need to execute your dbt commands under the terminal bash or use th dbt power user extensions
+To play with dbt, you just need to execute your dbt commands under a terminal bash or use the dbt power user extension
 
 # dbt models folders
 We recommend to use a medaillon architecture with a data mesh approach.
-You should have at least one dbt project by data domain.
+You should have at least one dbt project by data domain, each in a dedicated git repo. 
 Data products under a data domain should be organized under a folder topography like this:
 
-- 0_feeds: layer which contains the defintion of your data sources. Each data source must be defined in its own yaml file to ease metadata management and reduce Pull Requests conflicts
+- 0_feeds: layer which contains the defintion of your data sources. Each data source must be defined in its own yaml file to ease metadata management and reduce Pull Requests conflicts.
 
 - 1_silver: layer which contains all aggregated data products. Each data product is materialized by a specific schema under the silver database. The data products must me stored in a specific dbt folder.
 ~~~yaml
@@ -82,10 +82,12 @@ For silver and gold data products, you can use the following folders:
 - Join the [chat](https://community.getdbt.com/) on Slack for live discussions and support
 - Find [dbt events](https://events.getdbt.com) near you
 - Check out [the blog](https://blog.getdbt.com/) for the latest news on dbt's development and best practices
-
+- dbt power user [user guide](https://github.com/AltimateAI/vscode-dbt-power-user#HOW-TO-SETUP-THE-EXTENSION)
+- sqlfluff [doc](https://github.com/sqlfluff/sqlfluff)
+- 
 # Known issues
 - Sometimes the dbt power user extension has some trouble and reveal "dbt_project.yml" errors.
-To reset properly the vscode dbt extensionsYou just need to rerun the command:
+To reset properly the vscode dbt extensions.You just need to rerun the command:
 ~~~bash
 . .~/.bashrc
 ~~~
