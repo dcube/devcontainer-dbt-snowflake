@@ -26,13 +26,17 @@
                 "ms-python.pylint",
                 "ms-python.mypy-type-checker",
                 "ms-python.flake8",
-                "eeyore.yapf"
+                "eeyore.yapf",
+                "innoverio.vscode-dbt-power-user",
+                "dorzey.vscode-sqlfluff"
             ],
             "settings": {
                 "container.type": "dbt-snowflake",
                 "terminal.integrated.defaultProfile.linux": "bash",
-                "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python",
-                "dbt.dbtPythonPathOverride": "${workspaceFolder}/.venv/bin/python",
+                "terminal.integrated.shell.linux": "/bin/bash",
+	            "terminal.integrated.shellArgs.linux": [ "-i" ],
+                "python.defaultInterpreterPath": "/usr/local/bin/python",
+                "dbt.dbtPythonPathOverride": "/usr/local/bin/python",
                 "python.createEnvironment.contentButton": "hide",
                 "python.analysis.typeCheckingMode": "strict",
                 "python.analysis.importFormat": "absolute",
@@ -65,7 +69,7 @@
                 "python.testing.unittestEnabled": false,
                 "editor.defaultFormatter": "eeyore.yapf",
                 "git.preCommitEnabled": false,
-                "sqlfluff.executablePath": "${workspaceFolder}/.venv/bin/sqlfluff",
+                "sqlfluff.executablePath": "/usr/local/bin/sqlfluff",
                 "sqlfluff.format.enabled": true,
                 "sqlfluff.ignoreLocalConfig": false,
                 "sqlfluff.ignoreParsing": false,
@@ -84,7 +88,7 @@
     "remoteUser": "vscode",
     "remoteEnv": {
         "TOOLS_DIR": "/workspaces/app/.devcontainer/tools",
-        "DBT_PROFILES_DIR": "/workspaces/app/.venv",
+        "DBT_PROFILES_DIR": "/home/vscode/.dbt",
         "SF_AUTH_SOCKET_ADDR": "localhost", //fix snowflake externalbrowser loopback address
         "SF_AUTH_SOCKET_PORT": "57531", //fix snowflake externalbrowser loopback port
         "SF_AUTH_SOCKET_REUSEPORT": "true" //try to reuse port

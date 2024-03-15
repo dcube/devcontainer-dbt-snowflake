@@ -3,18 +3,26 @@ FROM mcr.microsoft.com/vscode/devcontainers/python:0-${VARIANT}
 
 WORKDIR /workspaces/app
 ARG WORKSPACE_FOLDER="/workspaces/app"
+ENV WORKSPACE_PATH=$WORKSPACE_FOLDER
 
-# Install program dependencies:
+# Prevent interactive popups when initializing debian.
+ENV DEBIAN_FRONTEND=noninteractive
 
+# Install OS packages
+RUN sudo apt-get update && apt-get -yq install vim dos2unix
+
+# Install python requirements
 RUN mkdir /tmp/config_container
-
-COPY /.devcontainer/install-deps.sh /tmp/config_container/install-deps.sh
-RUN chmod +x /tmp/config_container/install-deps.sh
-RUN /tmp/config_container/install-deps.sh
-
+COPY /.devcontainer/requirements.txt /tmp/config_container/requirements.txt
+RUN pip install --upgrade pip
+RUN pip install -r /tmp/config_container/requirements.txt
 RUN rm -rvf /tmp/config_container
 
-# Create virtual environment:
-VOLUME $WORKSPACE_FOLDER/.venv
+# persist bash history between sessions
+ARG USERNAME=vscode
 
-ENV WORKSPACE_PATH=$WORKSPACE_FOLDER
+RUN SNIPPET="export PROMPT_COMMAND='history -a' && export HISTFILE=/commandhistory/.bash_history" \
+    && mkdir /commandhistory \
+    && touch /commandhistory/.bash_history \
+    && chown -R $USERNAME /commandhistory \
+    && echo "$SNIPPET" >> "/home/$USERNAME/.bashrc"

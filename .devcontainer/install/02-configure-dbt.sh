@@ -8,10 +8,14 @@ echo -e "${BLUE}#####              Configure dbt                        #####${E
 echo -e "${BLUE}#####                                                   #####${ENDCOLOR}"
 echo -e "${BLUE}#############################################################${ENDCOLOR}"
 
-# create profiles.yaml into .venv using .credentials.env
-dbt_profile="$WORKSPACE_PATH/.venv/profiles.yml"
+# create profiles.yaml using .credentials.env
+if [ ! -d /home/vscode/.dbt ]; then
+    # Create the directory if it doesn't exist
+    mkdir -p /home/vscode/.dbt
+fi
+dbt_profile="/home/vscode/.dbt/profiles.yml"
 if  [ ! -f "$dbt_profile" ]; then
-    cat <<EOF > "$dbt_profile"
+    cat <<EOF > /home/vscode/.dbt/profiles.yml
 default:
   target: default
   outputs:
@@ -40,4 +44,7 @@ config:
 EOF
 fi
 
+cat <<EOF >> ~/.bashrc
+cd $WORKSPACE_PATH/src
+EOF
 echo -e "Done"

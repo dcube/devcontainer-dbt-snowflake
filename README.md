@@ -51,7 +51,7 @@ To play with dbt, you just need to execute your dbt commands under a terminal ba
 
 # dbt models folders
 We recommend to use a medaillon architecture with a data mesh approach.
-You should have at least one dbt project by data domain, each in a dedicated git repo. 
+You should have at least one dbt project by data domain, each in a dedicated git repo.
 Data products under a data domain should be organized under a folder topography like this:
 
 - 0_feeds: layer which contains the defintion of your data sources. Each data source must be defined in its own yaml file to ease metadata management and reduce Pull Requests conflicts.
@@ -84,15 +84,8 @@ For silver and gold data products, you can use the following folders:
 - Check out [the blog](https://blog.getdbt.com/) for the latest news on dbt's development and best practices
 - dbt power user [user guide](https://github.com/AltimateAI/vscode-dbt-power-user#HOW-TO-SETUP-THE-EXTENSION)
 - sqlfluff [doc](https://github.com/sqlfluff/sqlfluff)
-- 
+-
 # Known issues
-- Sometimes the dbt power user extension has some trouble and reveal "dbt_project.yml" errors.
-To reset properly the vscode dbt extensions.You just need to rerun the command:
-~~~bash
-. .~/.bashrc
-~~~
-This will uninstall the extensions, rerun the dbt deps, and re install the extensions
-
 - Sometines when running dbt command you will get the error:
 ~~~bash
 Database error while listing schemas in database "<your database>"
