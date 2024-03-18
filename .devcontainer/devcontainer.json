@@ -89,7 +89,7 @@
     "remoteUser": "vscode",
     "remoteEnv": {
         "TOOLS_DIR": "/workspaces/app/.devcontainer/tools",
-        "DBT_DIR": "/workspaces/app/src",
+        "DBT_DIR": "/workspaces/app/dbt_grizzly",
         "DBT_PROFILES_DIR": "/home/vscode/.dbt",
         "SF_AUTH_SOCKET_ADDR": "localhost", //fix snowflake externalbrowser loopback address
         "SF_AUTH_SOCKET_PORT": "57531", //fix snowflake externalbrowser loopback port
