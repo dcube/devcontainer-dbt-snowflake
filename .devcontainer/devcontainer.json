@@ -3,7 +3,7 @@
     "workspaceMount": "source=${localWorkspaceFolder},target=/workspaces/app,type=bind",
     "workspaceFolder": "/workspaces/app",
     "mounts": [
-        "type=bind,source=${localEnv:HOME}${localEnv:USERPROFILE}/.ssh,target=/home/vscode/.ssh,readonly"
+        "source=${localEnv:HOME}${localEnv:USERPROFILE}/.ssh,target=/home/vscode/.ssh,readonly,type=bind"
     ],
     "runArgs": [
         "--env-file",
@@ -37,6 +37,7 @@
 	            "terminal.integrated.shellArgs.linux": [ "-i" ],
                 "python.defaultInterpreterPath": "/usr/local/bin/python",
                 "dbt.dbtPythonPathOverride": "/usr/local/bin/python",
+                "python.interpreter.infoVisibility": "always",
                 "python.createEnvironment.contentButton": "hide",
                 "python.analysis.typeCheckingMode": "strict",
                 "python.analysis.importFormat": "absolute",
@@ -88,6 +89,7 @@
     "remoteUser": "vscode",
     "remoteEnv": {
         "TOOLS_DIR": "/workspaces/app/.devcontainer/tools",
+        "DBT_DIR": "/workspaces/app/src",
         "DBT_PROFILES_DIR": "/home/vscode/.dbt",
         "SF_AUTH_SOCKET_ADDR": "localhost", //fix snowflake externalbrowser loopback address
         "SF_AUTH_SOCKET_PORT": "57531", //fix snowflake externalbrowser loopback port

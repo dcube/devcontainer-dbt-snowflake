@@ -21,4 +21,4 @@ git config --global user.email "$GIT_USEREMAIL"
 git config --global user.name "$GIT_USERNAME"
 EOF
 
-echo -e "Done"
+echo -e "\nDone\n"

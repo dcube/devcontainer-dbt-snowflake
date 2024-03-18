@@ -93,7 +93,7 @@ Database error while listing schemas in database "<your database>"
     [Errno 98] Address already in use
 ~~~
 Because of using Snowflake externalbrowser auth mecanisms, we should have been forced to specifyed the loopback port forwarding when connecting to snowflake via the external browser, cf. devcontainer.json file **remoteEnv** and **forwardPorts** sections.
-To kill all processes concurrently using port 557351, you simply need to execute the command:
+To kill all processes concurrently using port 557351, ensure you've got only one terminal and execute the command:
 ~~~bash
 $TOOLS_DIR/kill_pid_listening_lpbck.sh
 ~~~

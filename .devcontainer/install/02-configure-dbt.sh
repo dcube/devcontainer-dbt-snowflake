@@ -8,11 +8,15 @@ echo -e "${BLUE}#####              Configure dbt                        #####${E
 echo -e "${BLUE}#####                                                   #####${ENDCOLOR}"
 echo -e "${BLUE}#############################################################${ENDCOLOR}"
 
+echo -e "\n${GREEN}> Create local dbt profiles if not exists.${ENDCOLOR}\n"
+
 # create profiles.yaml using .credentials.env
 if [ ! -d /home/vscode/.dbt ]; then
     # Create the directory if it doesn't exist
     mkdir -p /home/vscode/.dbt
 fi
+
+# create the local profiles.yml if not exists
 dbt_profile="/home/vscode/.dbt/profiles.yml"
 if  [ ! -f "$dbt_profile" ]; then
     cat <<EOF > /home/vscode/.dbt/profiles.yml
@@ -44,7 +48,12 @@ config:
 EOF
 fi
 
+#install dbt dependencies
+echo -e "\n${GREEN}> Install dbt dependencies.${ENDCOLOR}\n"
+$DBT_DIR/dbt deps
+
 cat <<EOF >> ~/.bashrc
-cd $WORKSPACE_PATH/src
+cd $DBT_DIR
 EOF
-echo -e "Done"
+
+echo -e "\nDone\n"
