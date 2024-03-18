@@ -50,7 +50,8 @@ fi
 
 #install dbt dependencies
 echo -e "\n${GREEN}> Install dbt dependencies.${ENDCOLOR}\n"
-$DBT_DIR/dbt deps
+cd $DBT_DIR
+dbt deps
 
 cat <<EOF >> ~/.bashrc
 cd $DBT_DIR
