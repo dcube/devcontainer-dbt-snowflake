@@ -9,7 +9,7 @@ On your local machine, you'll need:
 - A snowflake account with SSO enabled
 
 # Create the .credentials.env file
-Before building the container (next step), you have to create the **.credential.env** into the **.devccontainer** folder.
+Before building the container (next step), you have to create the **.credentials.env** into the **.devccontainer** folder.
 The file must contain your Snowflake and git informations:
 
 ```bash
