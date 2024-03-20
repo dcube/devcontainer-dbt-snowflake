@@ -32,6 +32,7 @@
             ],
             "settings": {
                 "container.type": "dbt-snowflake",
+                "remote.autoForwardPortsSource":"process", //fix snowflake externalbrowser loopback dynamic port
                 "terminal.integrated.defaultProfile.linux": "bash",
                 "terminal.integrated.shell.linux": "/bin/bash",
 	            "terminal.integrated.shellArgs.linux": [ "-i" ],
@@ -83,7 +84,6 @@
         }
     },
     "forwardPorts": [
-        57531 // for snowflake externalbrowser loopback forwarding
     ],
     "postCreateCommand": "sudo chmod +x $WORKSPACE_PATH/.devcontainer/install.sh && $WORKSPACE_PATH/.devcontainer/install.sh",
     "remoteUser": "vscode",
@@ -92,7 +92,6 @@
         "DBT_DIR": "/workspaces/app/src",
         "DBT_PROFILES_DIR": "/home/vscode/.dbt",
         "SF_AUTH_SOCKET_ADDR": "localhost", //fix snowflake externalbrowser loopback address
-        "SF_AUTH_SOCKET_PORT": "57531", //fix snowflake externalbrowser loopback port
         "SF_AUTH_SOCKET_REUSEPORT": "true" //try to reuse port
 	}
 }
