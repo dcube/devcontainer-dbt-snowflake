@@ -17,6 +17,7 @@ DBT_SF_ACCOUNT=<your snowflake account>
 DBT_SF_WAREHOUSE=<the warehouse to use with dbt>
 DBT_SF_DATABASE=<the database where dbt will write data>
 DBT_SF_SCHEMA=<prefix for your database schemas>
+DBT_SF_ENV=00_DEV
 DBT_SF_USER=<your email>
 DBT_SF_ROLE=<the snowflake role you want to use >
 GIT_USEREMAIL=$DBT_SF_USER
