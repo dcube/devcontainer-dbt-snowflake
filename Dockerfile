@@ -1,5 +1,5 @@
 ARG DBT_VERSION
-FROM ghcr.io/dbt-labs/dbt-snowflake:${DBT_VERSION}.latest
+FROM ghcr.io/dbt-labs/dbt-snowflake:${DBT_VERSION}
 
 # Set environment variables
 ENV DBT_APP_DIR=/dbt

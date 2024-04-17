@@ -36,8 +36,9 @@ jobs:
         needs: [check-dbt-models]
         if : success()
         run: |
-          mkdir -p artifact/dbt
-          cp -R ./src artifact/dbt
+          mkdir -p artifact/src
+          cp -R ./src artifact/src
+          cp ./Dockerfile artifact/.
         shell: sh
 
       - name: Publish artifact
