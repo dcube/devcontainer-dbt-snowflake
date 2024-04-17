@@ -27,19 +27,44 @@ jobs:
           pip install sqlfluff==${{ vars.SQLFLUFF_VERSION }}
         shell: sh
 
-      - name: Check dbt models
-        id: check-dbt-models
+      - name: Check dbt quality code
+        id: check-dbt-quality-code
         run: |
-          sqlfluff lint --dialect snowflake --templater jinja ./src/models
+          sqlfluff lint --dialect snowflake --templater jinja ${{ github.workspace }}/src/models
+
+      - name: Install dbt dependencies
+        id: install-dbt-deps
+        needs: [check-dbt-quality-code]
+        if : success()
+        run: |
+          cd ${{ github.workspace }}/src
+          dbt deps
+
+      - name: Check dbt compile
+        id: check-dbt-compile
+        shell: bash
+        run: |
+          export DBT_SF_ACCOUNT=${{ secrets.SNOWFLAKE_ACCOUNT }}
+          export DBT_SF_ROLE=${{ secrets.SNOWFLAKE_ROLE }}
+          export DBT_SF_DATABASE=${{ secrets.SNOWFLAKE_DATABASE }}
+          export DBT_SF_SCHEMA=${{ secrets.SNOWFLAKE_SCHEMA }}
+          export DBT_SF_WAREHOUSE=${{ secrets.SNOWFLAKE_WAREHOUSE }}
+          export DBT_SF_USER=${{ secrets.SNOWFLAKE_USER }}
+          export DBT_SF_PASSWORD=${{ secrets.SNOWFLAKE_PASSWORD }}
+
+          cd ${{ github.workspace }}/src
+          dbt compile
+          rm -r logs
+          rm -r target
 
       - name: Prepare artifact
-        needs: [check-dbt-models]
+        needs: [check-dbt-compile]
         if : success()
+        shell: bash
         run: |
           mkdir -p artifact/src
           cp -R ./src artifact/src
           cp ./Dockerfile artifact/.
-        shell: sh
 
       - name: Publish artifact
         uses: actions/upload-artifact@v4
