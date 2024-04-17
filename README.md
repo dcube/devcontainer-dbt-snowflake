@@ -75,6 +75,13 @@ For silver and gold data products, you can use the following folders:
 - refined: for models that are refined and need to persist on your data plateforme. You can choose between **table** or **incremental** materialization depending on the size of data
 - output: if you want to expose some sort of semantic model on top of your refined data. For those models you should choose the **view** materialization
 
+# check your code
+We recommend to perform dbt code check with sqlfluff linter in order to check your sql and jinja code quality by applying rules defined in .sqlfluff file.
+If you need to run the linter over all your dbt models, you can use the $TOOLS_DIR/code_check.sh script:
+~~~bash
+$TOOLS_DIR/code_check.sh
+~~~
+
 # Learn about dbt
 **Resources:**
 - Learn more about dbt [in the docs](https://docs.getdbt.com/docs/introduction)
@@ -92,4 +99,3 @@ Database error while listing schemas in database "<your database>"
   Database Error
     [Errno 98] Address already in use
 ~~~
-

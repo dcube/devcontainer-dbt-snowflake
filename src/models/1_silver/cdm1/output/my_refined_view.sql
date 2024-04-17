@@ -1,2 +1,2 @@
 select *
-from {{ref("my_refined")}}
+from {{ ref("my_refined") }}
