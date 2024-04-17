@@ -1,0 +1,48 @@
+name: "Build dbt artifact"
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - 'src/**'
+
+jobs:
+  build_dbt_artifact:
+    name: Build dbt artifact
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ vars.PYTHON_VERSION }}
+
+      - name: Install dbt Snowflake
+        run: |
+          pip install --upgrade setuptools
+          pip install dbt-snowflake==${{ vars.DBT_VERSION }}
+          pip install sqlfluff==${{ vars.SQLFLUFF_VERSION }}
+        shell: sh
+
+      - name: Check dbt models
+        id: check-dbt-models
+        run: |
+          sqlfluff lint --dialect snowflake --templater jinja ./src/models
+
+      - name: Prepare artifact
+        needs: [check-dbt-models]
+        if : success()
+        run: |
+          mkdir -p artifact/dbt
+          cp -R ./src artifact/dbt
+        shell: sh
+
+      - name: Publish artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: dbt
+          path: artifact
+          retention-days: 15
